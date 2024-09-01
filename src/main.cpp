@@ -123,6 +123,7 @@ void loop() {
 //FUNCIONES
 void empezar(){
   int i;
+  nivel = 1;
 
   //Generar N números aleatorios entre 0 y 3. 
   //Cada número se corresponde con un color: verde, rojo, azul y amarillo
@@ -134,7 +135,13 @@ void empezar(){
   lcd.print("Vamos a jugar a");
   lcd.setCursor(3,1);
   lcd.print("SIMON DICE");
-
+  delay(500);
+  lcd.clear();
+  //Comenzamos por el nivel 1
+  lcd.setCursor(1,3);
+  lcd.print("***NIVEL ");
+  lcd.print(nivel);
+  lcd.print("***");
   ledcWriteNote(0, NOTE_A, 3);
   delay(100);
   ledcWriteNote(0, NOTE_B, 5);
@@ -168,8 +175,7 @@ void empezar(){
   ledcWrite(0, 0);
   delay(500);
 
-  //Comenzamos por el nivel 1
-  nivel = 1;
+  
 }
 
 void perder(){
@@ -181,7 +187,9 @@ void perder(){
 
   lcd.clear();
   lcd.setCursor(0,0);
-  lcd.print("OH NOO");
+  lcd.print("OH NOO ");
+  lcd.print("NIVEL ");
+  lcd.print(nivel);
   lcd.setCursor(0,1);
   lcd.print("HAS PERDIDO! ");
   lcd.write(byte(0));
@@ -206,6 +214,11 @@ void ganar(){
   lcd.setCursor(0,1);
   lcd.print("HAS GANADO! ");
   lcd.write(byte(1));
+  delay(500);
+  lcd.clear();
+  lcd.setCursor(0,0);
+  lcd.print("NIVEL ");
+  lcd.print(nivel);
 
   ledcWriteNote(0, NOTE_A, 3);
   delay(100);
